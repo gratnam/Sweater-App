@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/jquery.mobile.flatui.css" />
+  <link rel="stylesheet" type="text/css" href="css/styles.css" />
+  <script src="js/jquery.js"></script>
+
+  <script type="text/javascript">
+
+    //array of city coordinates
+    var cities = {
+      "chicago" : {coords: {latitude: 41.879003, longitude: -87.63675}},
+      "new york" : {coords: {latitude:40.672060, longitude:-73.983898}},
+      "los angeles" : {coords: {latitude:34.101422, longitude:-118.341224}},
+      "san francisco" : {coords: {latitude:37.788531, 
+    //function for ajax request
+    var loadWeather = function(cityCoords){
+      var latlng = cityCoords.coords.latitude + "," + cityCoords.coords.longitude;
+      var apiURL = "https://api.forecast.io/forecast/9123b58e7fc6aa24b65630193e1153a9/" + latlng ;
+
+      $.ajax({
+        url: apiURL,
+        jsonpCallback: "jsonCallback",
+        contenType: "application/json",
+        dataType: "jsonp",
+        success: function(json){
+          console.log(json.currently.temperature);
+
+          $("#current_temp").html(json.currently.temperature + " &#176; F");
+          $("#summary").html(json.currently.summary);
+        },
+        error: function(err){
+          console.log(err.message);
+        }
+      });
+
+    };
+
+    function loadCity(city){ 
+      $("#location").html(city);
+      loadWeather(cities[city.toLowerCase()]);
+    };
+
+    $(document).ready(function(){
+      loadCity("San Francisco"); 
+      $("a.city").bind("click", function(){
+        loadCity($(this).html());
+      });
+    });
+
+
+
+  </script>
+  
+  <script>
+    $(document).bind('mobileinit',function(){
+        $.mobile.changePage.defaults.changeHash = false;
+        $.mobile.hashListeningEnabled = false;
+        $.mobile.pushStateEnabled = false;
+    });
+  </script> 
+
+  <script src="js/jquery.mobile-1.4.0-rc.1.js"></script>
+</head>
+<body>
+  <div data-role="page">
+
+    <div data-role="panel" id="left-panel" data-position="left" data-theme="g" data-display="push">
+      <ul data-role="listview">
+      
+        <li data-role="list-divider">select a city</li>
+        <li><a href="#" data-rel="close" class="city">San Francisco</a></li>
+        <li><a href="#" data-rel="close" class="city">Chicago</a></li>
+        <li><a href="#" data-rel="close" class="city">Los Angeles</a></li>
+        <li><a href="#" data-rel="close" class="city">New York</a></li>
+        <li><a href="#" data-rel="close" class="city">Miami</a></li>
+      </ul>
+    </div>
+
+
+
+    <div data-role="header" data-theme="f"> 
+      <h1>Do you need a sweater?</h1>
+      <a data-iconpos="notext" href="#left-panel" data-role="button" data-icon="flat-menu"></a>
+    </div>
+
+
+
+
+    <div class="content" data-role="content" role="main">
+      <h1 id="current_temp"></h1>
+      <h3 id="summary">Partly Cloudy</h3>
+      <p id="location">Location</p>
+
+    </div>
+
+
+
+  </div>
+
+  <div id="highlight"> </div>
+</body>
+</html>
