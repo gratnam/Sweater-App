@@ -15,5 +15,16 @@
   "bugs": {
     "url": "https://github.com/gratnam/Sweater-App/issues"
   },
-  "homepage": "https://github.com/gratnam/Sweater-App#readme"
+  "homepage": "https://github.com/gratnam/Sweater-App#readme",
+  "dependencies": {
+    "angular": "^1.4.8",
+    "angular-resource": "^1.4.8",
+    "angular-route": "^1.4.8",
+    "express": "^4.13.3",
+    "fs": "0.0.2",
+    "http-dispatcher": "^0.2.2",
+    "path": "^0.12.7"
+
+  }
 }
+
