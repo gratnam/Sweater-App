@@ -45,30 +45,6 @@
   
     };
 
-
-    // var loadWeather = function(cityCoords){
-    //   var latlng = cityCoords.coords.latitude + "," + cityCoords.coords.longitude;
-    //   var apiURL = "https://api.forecast.io/forecast/9123b58e7fc6aa24b65630193e1153a9/37.8267,-122.423";//"https://api.forecast.io/forecast/9123b58e7fc6aa24b65630193e1153a9/" + latlng ;
-
-    //   $.ajax({
-    //     url: apiURL,
-    //     jsonpCallback: "jsonCallback",
-    //     contenType: "application/json",
-    //     dataType: "jsonp",
-    //     success: function(json){
-    //       console.log(json.currently.temperature);
-
-    //       $("#current_temp").html(json.currently.temperature + " &#176; F");
-    //       $("#summary").html(json.currently.summary);
-    //     },
-    //     error: function(err){
-    //       console.log(err.message);
-    //     }
-    //   });
-
-    // };
-
-
     $(document).ready(function(){
       loadCity("Chicago"); 
       $("a.city").bind("click", function(){
@@ -106,7 +82,7 @@
 
 
     <div data-role="header" data-theme="f"> 
-      <h1>Do you need a sweater? punnk</h1>
+      <h1>Do you need a sweater?</h1>
       <a data-iconpos="notext" href="#left-panel" data-role="button" data-icon="flat-menu"></a>
     </div>
 
