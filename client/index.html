@@ -14,42 +14,30 @@
       "chicago" : {coords: {latitude: 41.879003, longitude: -87.63675}},
       "new york" : {coords: {latitude:40.672060, longitude:-73.983898}},
       "los angeles" : {coords: {latitude:34.101422, longitude:-118.341224}},
-      "san francisco" : "poop"
     };
-    //function for ajax request
 
     var loadCity = function(city){ 
       $("#location").html(city);
-      console.log('hi', city);
       var latlng = cities[city.toLowerCase()].coords.latitude + "," + cities[city.toLowerCase()].coords.longitude;
-      console.log('latlng', cities[city.toLowerCase()].coords.latitude + "," + cities[city.toLowerCase()].coords.longitude );
-      var apiURL = "https://api.forecast.io/forecast/9123b58e7fc6aa24b65630193e1153a9/" + latlng; 
-      
-      //loadWeather(cities[city.toLowerCase()]);
-      $.ajax({
-        url: apiURL,
-        jsonpCallback: "jsonCallback",
-        contenType: "application/json",
-        dataType: "jsonp",
-        success: function(json){
-          console.log(json.currently.temperature);
+      console.log('2. loadCity!', latlng);
 
-          $("#current_temp").html(json.currently.temperature + " &#176; F");
-          $("#summary").html(json.currently.summary);
-        },
-        error: function(err){
-          console.log(err.message);
-        }
+      $.post('/hallo', {latlng: latlng}, 
+        function(data, status){
+        console.log('5. data', data);
+        $("#current_temp").html(data[0]  + " &#176; F");
+        $("#summary").html(data[1]);
       });
-
-  
     };
 
+    
+
     $(document).ready(function(){
-      loadCity("Chicago"); 
-      $("a.city").bind("click", function(){
+      //loadCity("Chicago"); 
+      $("a.city").on("click", function(){
+        console.log('1. clicked!!')
         loadCity($(this).html());
       });
+      
     });
 
   </script>
@@ -65,11 +53,10 @@
   <script src="js/jquery.mobile-1.4.0-rc.1.js"></script>
 </head>
 <body>
-  <div data-role="page">
 
+  <div data-role="page">
     <div data-role="panel" id="left-panel" data-position="left" data-theme="g" data-display="push">
       <ul data-role="listview">
-      
         <li data-role="list-divider">select a city</li>
         <li><a href="#" data-rel="close" class="city">San Francisco</a></li>
         <li><a href="#" data-rel="close" class="city">Chicago</a></li>
@@ -78,28 +65,18 @@
         <li><a href="#" data-rel="close" class="city">Miami</a></li>
       </ul>
     </div>
-
-
-
     <div data-role="header" data-theme="f"> 
       <h1>Do you need a sweater?</h1>
       <a data-iconpos="notext" href="#left-panel" data-role="button" data-icon="flat-menu"></a>
     </div>
-
-
-
-
     <div class="content" data-role="content" role="main">
       <h1 id="current_temp"></h1>
       <h3 id="summary">Partly Cloudy </h3>
       <p id="location">Location</p>
-
     </div>
-
-
-
   </div>
 
   <div id="highlight"> </div>
+
 </body>
 </html>
