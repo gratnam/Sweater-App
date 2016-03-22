@@ -32,7 +32,7 @@ app.post('/hallo', function(req, res) {
   function callback(error, response, body) {
     console.log('4. callback made')
     if (!error && response.statusCode == 200) {
-      console.log('4. hi', body)
+      console.log('4. hi')
       var info = JSON.parse(body);
       weather.temperature = info.currently.temperature;
       weather.summary = info.currently.summary;
