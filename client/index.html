@@ -12,8 +12,8 @@
     //array of city coordinates
     var cities = {
       "chicago" : {coords: {latitude: 41.879003, longitude: -87.63675}},
-      "new york" : {coords: {latitude:40.672060, longitude:-73.983898}},
-      "los angeles" : {coords: {latitude:34.101422, longitude:-118.341224}},
+      "new york" : {coords: {lati{coords: {latitude:34.101422, longitude:-118.341224}}tude:40.672060, longitude:-73.983898}},
+      "los angeles" : ,
     };
 
     var loadCity = function(city){ 
@@ -24,12 +24,10 @@
       $.post('/hallo', {latlng: latlng}, 
         function(data, status){
         console.log('5. data', data);
-        $("#current_temp").html(data[0]  + " &#176; F");
+        $("#current_temp").html(data[0] + " &#176; F");
         $("#summary").html(data[1]);
       });
     };
-
-    
 
     $(document).ready(function(){
       //loadCity("Chicago"); 
@@ -37,7 +35,6 @@
         console.log('1. clicked!!')
         loadCity($(this).html());
       });
-      
     });
 
   </script>
