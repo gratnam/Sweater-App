@@ -27,7 +27,7 @@ var options = {
 };
 
 app.post('/hallo', function(req, res) {
-  console.log('3. postyheard')
+  console.log('3. postyheard', req.body.latlng)
   var latlng = req.body.latlng;
   options.url = 'https://api.forecast.io/forecast/9123b58e7fc6aa24b65630193e1153a9/' + latlng;
   var weather = {temperature: 0, summary: 0};
@@ -35,13 +35,16 @@ app.post('/hallo', function(req, res) {
   function callback(error, response, body) {
     console.log('4. callback made')
     if (!error && response.statusCode == 200) {
-      console.log('4. hi')
+      console.log('4. safe')
       var info = JSON.parse(body);
       weather.temperature = info.currently.temperature;
       weather.summary = info.currently.summary;
       res.send([info.currently.temperature, info.currently.summary]);
      }
   };
+
+  request(options, callback);
+
 });
 
 
