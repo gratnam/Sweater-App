@@ -8,3 +8,8 @@ The client chooses a city from the view, that city is loaded into the Google Map
 The coordinates are passed to the server and Forecast API is queried and returns the current weather to the view.
 
 jQuery updates the view with the current weather and forecast summary for the selected city.
+
+
+Future Additions:
+-Google map view
+-Automatic location search
