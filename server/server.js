@@ -1,8 +1,11 @@
+
 var express = require('express');
 var app = express();
 var request = require('request')
 var qs = require('querystring')
 var bodyParser = require('body-parser')
+
+
 
 app.use(express.static('client'));
 app.use(express.static('bower_components'));
@@ -39,8 +42,6 @@ app.post('/hallo', function(req, res) {
       res.send([info.currently.temperature, info.currently.summary]);
      }
   };
-
-  request(options, callback);
 });
 
 
