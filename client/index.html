@@ -10,11 +10,7 @@
    <script type="text/javascript">
 
     //array of city coordinates
-    var cities = {
-      "chicago" : {coords: {latitude: 41.879003, longitude: -87.63675}},
-      "new york" : {coords: {lati{coords: {latitude:34.101422, longitude:-118.341224}}tude:40.672060, longitude:-73.983898}},
-      "los angeles" : ,
-    };
+ 
 
     var loadCity = function(city){ 
       $("#location").html(city);
@@ -67,6 +63,18 @@
       <a data-iconpos="notext" href="#left-panel" data-role="button" data-icon="flat-menu"></a>
     </div>
     <div class="content" data-role="content" role="main">
+
+
+<iframe
+  width="800"
+  height="500"
+  frameborder="0" style="border:0"
+  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBHSazA1g3Vw674Urj3QFmiym3Vm8J9R0k
+&q=record+stores+in+Seattle" allowfullscreen>
+</iframe>
+
+
+
       <h1 id="current_temp"></h1>
       <h3 id="summary">Partly Cloudy </h3>
       <p id="location">Location</p>
