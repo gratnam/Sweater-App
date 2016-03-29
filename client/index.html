@@ -6,30 +6,52 @@
   <link rel="stylesheet" type="text/css" href="css/jquery.mobile.flatui.css" />
   <link rel="stylesheet" type="text/css" href="css/styles.css" />
   <script src="js/jquery.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 
    <script type="text/javascript">
+   //Function to covert address to Latitude and Longitude
+    var getLocation =  function(address) {
+      var geocoder = new google.maps.Geocoder();
+      geocoder.geocode( { 'address': address}, function(results, status) {
 
-    //array of city coordinates
- 
+      if (status == google.maps.GeocoderStatus.OK) {
+          var latitude = results[0].geometry.location.lat();
+          var longitude = results[0].geometry.location.lng();
+          console.log(latitude, longitude);
+          var latlng = latitude + "," + longitude;
 
-    var loadCity = function(city){ 
-      $("#location").html(city);
-      var latlng = cities[city.toLowerCase()].coords.latitude + "," + cities[city.toLowerCase()].coords.longitude;
-      console.log('2. loadCity!', latlng);
 
-      $.post('/hallo', {latlng: latlng}, 
-        function(data, status){
-        console.log('5. data', data);
-        $("#current_temp").html(data[0] + " &#176; F");
-        $("#summary").html(data[1]);
-      });
-    };
+          $.post('/hallo', {latlng: latlng}, 
+            function(data, status){
+            console.log('5. data', data);
+            $("#current_temp").html(data[0] + " &#176; F");
+            $("#summary").html(data[1]);
+          });
+          } 
+      }); 
+    }
+
+    // //Call the function with address as parameter
+    // // getLocation('New York');
+
+    // var loadCity = function(city){ 
+    //   $("#location").html(city);
+    //   var latlng = cities[city.toLowerCase()].coords.latitude + "," + cities[city.toLowerCase()].coords.longitude;
+    //   console.log('2. loadCity!', latlng);
+
+    //   $.post('/hallo', {latlng: latlng}, 
+    //     function(data, status){
+    //     console.log('5. data', data);
+    //     $("#current_temp").html(data[0] + " &#176; F");
+    //     $("#summary").html(data[1]);
+    //   });
+    // };
 
     $(document).ready(function(){
       //loadCity("Chicago"); 
       $("a.city").on("click", function(){
         console.log('1. clicked!!')
-        loadCity($(this).html());
+        getLocation($(this).html());
       });
     });
 
@@ -64,14 +86,14 @@
     </div>
     <div class="content" data-role="content" role="main">
 
-
+<!-- 
 <iframe
   width="800"
   height="500"
   frameborder="0" style="border:0"
   src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBHSazA1g3Vw674Urj3QFmiym3Vm8J9R0k
 &q=record+stores+in+Seattle" allowfullscreen>
-</iframe>
+</iframe> -->
 
 
 
