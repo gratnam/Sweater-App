@@ -1,7 +1,7 @@
 # Sweater-App
 Do you need a sweater?
 
-This application uses jQuery, Node, Forecast.io API and Google Maps API. 
+This application uses jQuery, Node, Express, Forecast API and Google Maps API. 
 
 The client chooses a city from the view, that city is loaded into the Google Maps API function to convert the city into coordinates. 
 
